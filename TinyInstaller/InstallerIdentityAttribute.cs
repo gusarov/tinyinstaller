@@ -5,7 +5,7 @@ using System;
 namespace TinyInstaller
 {
 	[AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = false)]
-	public sealed class TinyInstallerIdentityAttribute : Attribute
+	public sealed class InstallerIdentityAttribute : Attribute
 	{
 		readonly string _identity;
 
@@ -14,7 +14,7 @@ namespace TinyInstaller
 			get { return _identity; }
 		}
 
-		public TinyInstallerIdentityAttribute(string identity)
+		public InstallerIdentityAttribute(string identity)
 		{
 			_identity = identity;
 		}

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 
 using MyNotepadInstallSpec;
 
@@ -32,7 +34,9 @@ namespace MyNotepadInstallPackage
 		static void Code()
 		{
 			var spec = SpecLoader.FromAssembly<MyNotepadInstallSpecClass>();
-			spec.TargetDir = "C:\\_cus";
+			var id = 5;
+			spec.TargetDir = "C:\\_cus"+id;
+			spec.Identity += id;
 			spec.Install();
 			Console.WriteLine("Installed");
 		}

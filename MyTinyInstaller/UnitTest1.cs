@@ -14,19 +14,20 @@ namespace MyTinyInstaller
 		[TestMethod]
 		public void TestMethod1()
 		{
-			new InstallationProcessor().Install(new InstallationSpecification()
-			                                    	{
-			                                    		Identity = "___Test", // authoring should generate it
-			                                    	});
+			new InstallationSpecification
+				{
+					Identity = "___Test",
+					// authoring should generate it
+				}.Install();
 		}
 
 		[TestMethod]
 		public void TestMethod2()
 		{
-			new InstallationProcessor().Uninstall(new InstallationSpecification()
+			new InstallationSpecification
 			{
 				Identity = "___Test", // authoring should generate it
-			});
+			}.Uninstall();
 		}
 
 	}

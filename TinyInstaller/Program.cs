@@ -16,7 +16,7 @@ namespace TinyInstaller
 	{
 		// Sample:
 
-		// TinyInstaller uninstall "C:\ProgramFiles\My App\Spec.dll"
+		// TinyInstaller uninstall "My App" "C:\ProgramFiles\My App\Spec.dll"
 		// load spec from specified assembly and initiate uninstallation process
 
 		// TinyInstaller uninstallCommit "My App" "C:\ProgramFiles\My App" 2455
@@ -27,24 +27,22 @@ namespace TinyInstaller
 			try
 			{
 				// MessageBox.Show(string.Join(" ", args)+"\r\n"+Assembly.GetExecutingAssembly().Location, "TinyInstaller");
-				// DebugUtils.WaitForDebugger();
-				// DebugUtils.DebuggerReattaching();
 				// WaitForDebugger();
 
 				for (int i = 0; i < args.Length; i++)
 				{
+					if (IsKey(args[i], "Uninstall"))
+					{
+						var identity = args[++i];
+						var spec = args[++i];
+						Uninstall(identity, spec);
+					}
 					if (IsKey(args[i], "UninstallCommit"))
 					{
 						var identity = args[++i];
 						var lastDirectoryToRemove = args[++i];
 						var waitForProcess = int.Parse(args[++i]);
 						UninstallCommit(identity, lastDirectoryToRemove, waitForProcess);
-					}
-					if (IsKey(args[i], "Uninstall"))
-					{
-						var identity = args[++i];
-						var spec = args[++i];
-						Uninstall(identity, spec);
 					}
 				}
 				return 0;

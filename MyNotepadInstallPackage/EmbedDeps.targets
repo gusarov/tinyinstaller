@@ -3,7 +3,7 @@
 		<ResolveReferencesDependsOn>
 			$(ResolveReferencesDependsOn);
 			EmbedDepsInfo;
-			EmbedDeps;
+			EmbedDeps1;
 		</ResolveReferencesDependsOn>
 		<BuildDependsOn>
 			$(BuildDependsOn);
@@ -18,7 +18,7 @@
 	</Target>
 	
 	<!-- Target Batching by every reference, but disable incremental build, since we allways should have EmbeddedResource set up to date -->
-	<Target Name="EmbedDeps" Inputs="%(ReferenceCopyLocalPaths.Identity)" Outputs="_run_allways_">
+	<Target Name="EmbedDeps1" Inputs="%(ReferenceCopyLocalPaths.Identity)" Outputs="_run_allways_">
 		<Message Text="Check: %(ReferenceCopyLocalPaths.Identity)" Importance="high" />
 		<PropertyGroup>
 			<CurrentRef>%(ReferenceCopyLocalPaths.Identity)</CurrentRef>
@@ -30,6 +30,20 @@
 			</EmbeddedResource>
 		</ItemGroup>
 	</Target>
+	<!--
+	<Target Name="EmbedDeps2" Inputs="%(ReferenceDependencyPaths.Identity)" Outputs="_run_allways_">
+		<Message Text="Check: %(ReferenceDependencyPaths.Identity)" Importance="high" />
+		<PropertyGroup>
+			<CurrentRef>%(ReferenceDependencyPaths.Identity)</CurrentRef>
+		</PropertyGroup>
+		<Message Text="$(CurrentRef)" Condition="$(CurrentRef.StartsWith($(SolutionDir)))" Importance="high" />
+		<ItemGroup>
+			<EmbeddedResource Include="$(CurrentRef)" Condition="$(CurrentRef.StartsWith($(SolutionDir)))">
+				<LogicalName>EmbedDeps_%(ReferenceDependencyPaths.Filename)%(ReferenceDependencyPaths.Extension)</LogicalName>
+			</EmbeddedResource>
+		</ItemGroup>
+	</Target>
+	-->
 	<Target Name="EmbedDepsClear">
 		<ItemGroup>
 			<TargetFilesDeployed Include="$(TargetDir)\**\*.*" />

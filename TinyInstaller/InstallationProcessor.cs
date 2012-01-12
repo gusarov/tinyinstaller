@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,6 +14,13 @@ namespace TinyInstaller
 {
 	public class InstallationProcessor
 	{
+		private readonly InstallationSpecification spec;
+
+		public InstallationProcessor(InstallationSpecification spec)
+		{
+			this.spec = spec;
+		}
+
 		public static string Expand(string str)
 		{
 			// TODO Verify
@@ -25,7 +33,8 @@ namespace TinyInstaller
 			// windows XP / 2003
 			if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("LocalAppData")))
 			{
-				Environment.SetEnvironmentVariable("LocalAppData", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+				Environment.SetEnvironmentVariable("LocalAppData",
+				                                   Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 			}
 			if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AppData")))
 			{
@@ -35,20 +44,73 @@ namespace TinyInstaller
 			return Environment.ExpandEnvironmentVariables(str);
 		}
 
-		private static RegistryKey _regRoot = Registry.CurrentUser;
+		private RegistryKey RegRoot
+		{
+			get { return GetRegRoot(spec.IsUserMode); }
+		}
+
+		private static RegistryKey GetRegRoot(bool isUserMode)
+		{
+			return isUserMode ? Registry.CurrentUser : Registry.LocalMachine;
+		}
+
 		private const string _uninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\";
 
-		public void Install(InstallationSpecification spec)
+		public void Install()
 		{
 			spec.Validate();
 
-			Environment.SetEnvironmentVariable("TargetDir", spec.TargetDir);
+			SetVariables();
 
-			DeployFiles(spec);
-			AddWindowsUninstallInformation(spec);
+			DeployFiles();
+			RunActions(false, true);
+			RunActions(true);
+			AddWindowsUninstallInformation();
 		}
 
-		void DeployFiles(InstallationSpecification spec)
+		void SetVariables()
+		{
+			Environment.SetEnvironmentVariable("TargetDir", spec.TargetDir);
+		}
+
+		void RunActions(bool installOrUninstall, bool ignoreErrors = false)
+		{
+			foreach (var installUtilAssembly in spec.AssembliesForInstallUtils)
+			{
+				var installUtil = Path.Combine(RuntimeEnvironment.GetRuntimeDirectory(), "InstallUtil");
+				try
+				{
+					Run(installUtil, (installOrUninstall ? "" : "/u") + " " + TargetFileNameById(installUtilAssembly.FileId));
+				}
+				catch (Exception ex)
+				{
+					if (!ignoreErrors)
+					{
+						throw;
+					}
+				}
+			}
+		}
+
+		void Run(string command, string arg)
+		{
+			var psi = new ProcessStartInfo(command, arg)
+			{
+				RedirectStandardError = true,
+				RedirectStandardOutput = true,
+				UseShellExecute = false,
+				WindowStyle = ProcessWindowStyle.Hidden,
+				CreateNoWindow = true,
+			};
+			var p = Process.Start(psi);
+			p.WaitForExit();
+			if (p.ExitCode != 0)
+			{
+				throw new Exception(string.Format("ExitCode: {0}: {1} {2}", p.ExitCode, p.StandardOutput.ReadToEnd(), p.StandardError.ReadToEnd()));
+			}
+		}
+
+		void DeployFiles()
 		{
 			foreach (var file in spec.FilesToInstall)
 			{
@@ -64,7 +126,12 @@ namespace TinyInstaller
 			}
 		}
 
-		void RemoveFiles(InstallationSpecification spec)
+		string TargetFileNameById(string fileId)
+		{
+			return Expand(spec.FilesToInstall.Single(x => x.FileId == fileId).TargetPath);
+		}
+
+		void RemoveFiles()
 		{
 			DeleteDir(spec.TargetDir);
 		}
@@ -74,13 +141,13 @@ namespace TinyInstaller
 			Directory.Delete(name, true);
 		}
 
-		public void ReadActualValues(InstallationSpecification spec)
+		public void ReadActualValues()
 		{
 			spec.IsInstalled = !string.IsNullOrEmpty(ReadRegistry<string>(spec.Identity, "DisplayName"));
 			spec.InstallLocation = ReadRegistry<string>(spec.Identity, "InstallLocation");
 		}
 
-		void AddWindowsUninstallInformation(InstallationSpecification spec)
+		void AddWindowsUninstallInformation()
 		{
 			// save actual install location
 			spec.InstallLocation = spec.TargetDir;
@@ -98,9 +165,9 @@ namespace TinyInstaller
 			}
 		}
 
-		public void Uninstall(InstallationSpecification spec)
+		public void Uninstall()
 		{
-			ReadActualValues(spec);
+			ReadActualValues();
 
 			if (!spec.IsInstalled)
 			{
@@ -108,6 +175,8 @@ namespace TinyInstaller
 			}
 			else
 			{
+				SetVariables();
+				RunActions(false);
 				if (AppDomain.CurrentDomain.GetAssemblies().Any(x => x.Location.StartsWith(spec.InstallLocation, StringComparison.InvariantCultureIgnoreCase)))
 				{
 					Rebase("UninstallCommit", spec.Identity, spec.InstallLocation, Process.GetCurrentProcess().Id);
@@ -138,7 +207,7 @@ namespace TinyInstaller
 
 		private void WriteRegistry(string identity, string parameter, object value)
 		{
-			Registry.SetValue(_regRoot.Name + "\\" + _uninstall + identity, parameter, value, GetKind(value));
+			Registry.SetValue(RegRoot.Name + "\\" + _uninstall + identity, parameter, value, GetKind(value));
 		}
 
 		RegistryValueKind GetKind(object value)
@@ -156,15 +225,39 @@ namespace TinyInstaller
 
 		private T ReadRegistry<T>(string identity, string parameter)
 		{
-			return (T)Registry.GetValue(_regRoot.Name + "\\" + _uninstall + identity, parameter, null);
+			return (T)Registry.GetValue(RegRoot.Name + "\\" + _uninstall + identity, parameter, null);
 		}
 
 		internal static void DeleteWindowsUninstallInformation(string identity)
 		{
-			using (var reg = _regRoot.OpenSubKey(_uninstall, true))
+			bool ok = false;
+			using (var reg = GetRegRoot(true).OpenSubKey(_uninstall, true))
 			{
-				reg.DeleteSubKey(identity);
+				if (reg != null)
+				{
+					if (reg.GetSubKeyNames().Contains(identity))
+					{
+						reg.DeleteSubKey(identity);
+						ok = true;
+					}
+				}
+			}
+			if(!ok)
+			{
+				using (var reg = GetRegRoot(false).OpenSubKey(_uninstall, true))
+				{
+					if (reg != null)
+					{
+						if (reg.GetSubKeyNames().Contains(identity))
+						{
+							reg.DeleteSubKey(identity);
+							ok = true;
+						}
+					}
+				}
 			}
 		}
+
+
 	}
 }

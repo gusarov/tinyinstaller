@@ -8,12 +8,12 @@ namespace TinyInstaller
 	{
 		public static void Install(this InstallationSpecification spec)
 		{
-			new InstallationProcessor().Install(spec);
+			new InstallationProcessor(spec).Install();
 		}
 
 		public static void Uninstall(this InstallationSpecification spec)
 		{
-			new InstallationProcessor().Uninstall(spec);
+			new InstallationProcessor(spec).Uninstall();
 		}
 	}
 }

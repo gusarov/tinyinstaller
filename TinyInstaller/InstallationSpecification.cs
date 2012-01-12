@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using System.Reflection;
 
 namespace TinyInstaller
 {
@@ -159,5 +160,7 @@ namespace TinyInstaller
 		{
 			get { return InstallationProcessor.Expand(@"%LocalAppData%\" + DefaultTargetDirName); }
 		}
+
+		public IEnumerable<InstallableFileInfo> AssembliesForInstallUtils { get; set; }
 	}
 }

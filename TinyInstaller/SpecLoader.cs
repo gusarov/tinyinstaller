@@ -27,7 +27,9 @@ namespace TinyInstaller
 
 		public static InstallationSpecification FromAssembly(Assembly targetAssembly)
 		{
-			var identityAttribute = targetAssembly.Attribute<TinyInstallerIdentityAttribute>();
+			var isUserMode = targetAssembly.Attribute<InstallUserModeAttribute>();
+
+			var identityAttribute = targetAssembly.Attribute<InstallerIdentityAttribute>();
 			var titleAttribute = targetAssembly.Attribute<AssemblyTitleAttribute>();
 			var productAttribute = targetAssembly.Attribute<AssemblyProductAttribute>();
 
@@ -58,14 +60,29 @@ namespace TinyInstaller
 			}
 
 			var container = GetFileContainer(targetAssembly);
-
+			var specAssembly = GetAssemblyFileId(targetAssembly, container);
 			var spec = new InstallationSpecification
 			{
 				Identity = identity,
 				FilesToInstall = container,
-				SpecAssembly = GetSpecAssembly(targetAssembly, container),
+				SpecAssembly = specAssembly,
+				AssembliesForInstallUtils = GetAssembliesForInstallUtils(container, targetAssembly).ToArray(),
 			};
+			if (isUserMode!=null)
+			{
+				spec.IsUserMode = isUserMode.IsUserMode;
+			}
 			return spec;
+		}
+
+		static IEnumerable<InstallableFileInfo> GetAssembliesForInstallUtils(IFileContainer container, Assembly target)
+		{
+			return target.GetCustomAttributes(typeof(InstallUtilsAssemblyAttribute), false).Cast<InstallUtilsAssemblyAttribute>().Select(x => GetTargetByInstallUtilsAssemblyAttribute(x, container)).ToList();
+		}
+
+		static InstallableFileInfo GetTargetByInstallUtilsAssemblyAttribute(InstallUtilsAssemblyAttribute attr, IFileContainer container)
+		{
+			return container.Where(x=>ValidExtension(x.FileId)).Single(x => x.FileName.StartsWith(attr.Assembly.FullName.Substring(0, attr.Assembly.FullName.IndexOf(','))));
 		}
 
 		static IFileContainer GetFileContainer(Assembly targetAssembly)
@@ -77,13 +94,13 @@ namespace TinyInstaller
 			return new FsFileContainer(Path.GetDirectoryName(targetAssembly.Location));
 		}
 
-		static string GetSpecAssembly(Assembly targetAssembly, IFileContainer container)
+		static string GetAssemblyFileId(Assembly assembly, IFileContainer container)
 		{
-			if (IsEmbeded(targetAssembly))
+			if (IsEmbeded(assembly))
 			{
-				return container.Single(x => Path.GetFileNameWithoutExtension(x.FileId) == targetAssembly.GetName().Name && ValidExtension(x.FileId)).FileId;
+				return container.Single(x => Path.GetFileNameWithoutExtension(x.FileId) == assembly.GetName().Name && ValidExtension(x.FileId)).FileId;
 			}
-			return Path.GetFileName(targetAssembly.Location);
+			return Path.GetFileName(assembly.Location);
 		}
 
 		static bool ValidExtension(string fileId)
@@ -96,14 +113,5 @@ namespace TinyInstaller
 		{
 			return string.IsNullOrEmpty(targetAssembly.Location);
 		}
-	}
-
-	static class UtilsExt
-	{
-		public static T Attribute<T>(this ICustomAttributeProvider attributeProvider)
-		{
-			return (T)attributeProvider.GetCustomAttributes(typeof(T), false).SingleOrDefault();
-		}
-
 	}
 }

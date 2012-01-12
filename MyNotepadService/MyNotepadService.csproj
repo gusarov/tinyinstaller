@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6F533877-76DF-489B-8A09-BADD150217FA}</ProjectGuid>
+    <ProjectGuid>{D61FB039-6F21-4096-876D-34954B5F6C31}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TinyInstaller</RootNamespace>
-    <AssemblyName>TinyInstaller</AssemblyName>
+    <RootNamespace>MyNotepadService</RootNamespace>
+    <AssemblyName>MyNotepadService</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,8 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,21 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmbededResourceFileContainer.cs" />
-    <Compile Include="FsFileContainer.cs" />
-    <Compile Include="IFileContainer.cs" />
-    <Compile Include="InstallableFileInfo.cs" />
-    <Compile Include="InstallationProcessor.cs" />
-    <Compile Include="InstallationProcessorExt.cs" />
-    <Compile Include="InstallationSpecification.cs" />
-    <Compile Include="InstallUtilsAssemblyAttribute.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Installer2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Installer2.Designer.cs">
+      <DependentUpon>Installer2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecLoader.cs" />
-    <Compile Include="InstallerIdentityAttribute.cs" />
-    <Compile Include="InstallUserModeAttribute.cs" />
-    <Compile Include="UtilsExt.cs" />
-    <Compile Include="WuAttribute.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Service1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service1.Designer.cs">
+      <DependentUpon>Service1.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Installer2.resx">
+      <DependentUpon>Installer2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
