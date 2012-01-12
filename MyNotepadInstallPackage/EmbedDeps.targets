@@ -1,0 +1,39 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<ResolveReferencesDependsOn>
+			$(ResolveReferencesDependsOn);
+			EmbedDepsInfo;
+			EmbedDeps;
+		</ResolveReferencesDependsOn>
+		<BuildDependsOn>
+			$(BuildDependsOn);
+			EmbedDepsClear;
+		</BuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="EmbedDepsInfo">
+		<Message Text="ReferencePaths: %(ReferencePaths.Identity)" Importance="high" />
+		<Message Text="ReferenceDependencyPaths: %(ReferenceDependencyPaths.Identity)" Importance="high" />
+		<Message Text="ReferenceCopyLocalPaths: %(ReferenceCopyLocalPaths.Identity)" Importance="high" />
+	</Target>
+	
+	<!-- Target Batching by every reference, but disable incremental build, since we allways should have EmbeddedResource set up to date -->
+	<Target Name="EmbedDeps" Inputs="%(ReferenceCopyLocalPaths.Identity)" Outputs="_run_allways_">
+		<Message Text="Check: %(ReferenceCopyLocalPaths.Identity)" Importance="high" />
+		<PropertyGroup>
+			<CurrentRef>%(ReferenceCopyLocalPaths.Identity)</CurrentRef>
+		</PropertyGroup>
+		<Message Text="$(CurrentRef)" Condition="$(CurrentRef.StartsWith($(SolutionDir)))" Importance="high" />
+		<ItemGroup>
+			<EmbeddedResource Include="$(CurrentRef)" Condition="$(CurrentRef.StartsWith($(SolutionDir)))">
+				<LogicalName>EmbedDeps_%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
+			</EmbeddedResource>
+		</ItemGroup>
+	</Target>
+	<Target Name="EmbedDepsClear">
+		<ItemGroup>
+			<TargetFilesDeployed Include="$(TargetDir)\**\*.*" />
+		</ItemGroup>
+		<Delete ContinueOnError="true" Files="%(TargetFilesDeployed.Identity)" Condition=" '%(TargetFilesDeployed.Filename)%(TargetFilesDeployed.Extension)' != '$(TargetFileName)'" />
+	</Target>
+</Project>
