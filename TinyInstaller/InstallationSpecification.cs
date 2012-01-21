@@ -7,8 +7,17 @@ using System.Reflection;
 
 namespace TinyInstaller
 {
+	public enum InstallationInterface
+	{
+		Sielent, // display no UI
+		ProgressUi, // display AdobeFlash-style passive installator
+		ProgressOkUi, // display AdobeFlash-style installator with one button
+	}
+
 	public class InstallationSpecification
 	{
+		public InstallationInterface Interface { get; set; }
+
 		public bool IsInstalled { get; set; }
 
 		public IFileContainer FilesToInstall { get; set; }

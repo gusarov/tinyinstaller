@@ -36,6 +36,8 @@ namespace MyNotepadInstallPackage
 			var spec = SpecLoader.FromAssembly<MyNotepadInstallSpecClass>();
 			var id = 5;
 			spec.TargetDir = "C:\\_cus"+id;
+			// spec.IsUserMode = true;
+			spec.Interface = InstallationInterface.ProgressUi;
 			spec.Identity += id;
 			spec.Install();
 			Console.WriteLine("Installed");

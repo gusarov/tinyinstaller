@@ -8,7 +8,7 @@ namespace TinyInstaller
 	/// Windows Uninstall - WriteRegistry value of this property to the registry for operating system
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-	internal sealed class WuAttribute : Attribute
+	sealed class WuAttribute : Attribute
 	{
 	}
 }

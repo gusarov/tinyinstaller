@@ -46,11 +46,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\IInstallerAction.cs" />
+    <Compile Include="Actions\ShortcutInstallerAction.cs" />
+    <Compile Include="CreateShourtcut\WIN32_FIND_DATAW.cs" />
+    <Compile Include="CreateShourtcut\IPersist.cs" />
+    <Compile Include="CreateShourtcut\IPersistFile.cs" />
+    <Compile Include="CreateShourtcut\IShellLinkW.cs" />
+    <Compile Include="CreateShourtcut\ShellLink.cs" />
+    <Compile Include="CreateShourtcut\ShellLinkApi.cs" />
+    <Compile Include="CreateShourtcut\SLGP_FLAGS.cs" />
+    <Compile Include="CreateShourtcut\SLR_FLAGS.cs" />
+    <Compile Include="CreateShourtcut\Static.cs" />
     <Compile Include="ServiceInstaller\ServiceInfo.cs" />
     <Compile Include="ServiceInstaller\ServiceInstaller.cs" />
     <Compile Include="Actions\ServiceInstallerAction.cs" />
-    <Compile Include="EmbededResourceFileContainer.cs" />
-    <Compile Include="FsFileContainer.cs" />
+    <Compile Include="Internal\EmbededResourceFileContainer.cs" />
+    <Compile Include="Internal\FsFileContainer.cs" />
     <Compile Include="IFileContainer.cs" />
     <Compile Include="InstallableFileInfo.cs" />
     <Compile Include="InstallationProcessor.cs" />
@@ -61,9 +71,9 @@
     <Compile Include="SpecLoader.cs" />
     <Compile Include="InstallerIdentityAttribute.cs" />
     <Compile Include="InstallUserModeAttribute.cs" />
-    <Compile Include="UtilsExt.cs" />
-    <Compile Include="WuAttribute.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Internal\UtilsExt.cs" />
+    <Compile Include="Internal\WuAttribute.cs" />
+    <Compile Include="_Program.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

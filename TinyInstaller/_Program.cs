@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace TinyInstaller
 {
-	static class Program
+	static class _Program
 	{
 		// Sample:
 

@@ -14,11 +14,11 @@ namespace TinyInstaller
 {
 	public class InstallationProcessor
 	{
-		private readonly InstallationSpecification spec;
+		private readonly InstallationSpecification _spec;
 
 		public InstallationProcessor(InstallationSpecification spec)
 		{
-			this.spec = spec;
+			_spec = spec;
 		}
 
 		public static string Expand(string str)
@@ -46,7 +46,7 @@ namespace TinyInstaller
 
 		private RegistryKey RegRoot
 		{
-			get { return GetRegRoot(spec.IsUserMode); }
+			get { return GetRegRoot(_spec.IsUserMode); }
 		}
 
 		private static RegistryKey GetRegRoot(bool isUserMode)
@@ -56,9 +56,11 @@ namespace TinyInstaller
 
 		private const string _uninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\";
 
+
+
 		public void Install()
 		{
-			spec.Validate();
+			_spec.Validate();
 
 			SetVariables();
 
@@ -70,12 +72,12 @@ namespace TinyInstaller
 
 		void SetVariables()
 		{
-			Environment.SetEnvironmentVariable("TargetDir", spec.TargetDir);
+			Environment.SetEnvironmentVariable("TargetDir", _spec.TargetDir);
 		}
 
 		void RunActions(bool installOrUninstall, bool ignoreErrors = false)
 		{
-			foreach (var installUtilAssembly in spec.AssembliesForInstallUtils)
+			foreach (var installUtilAssembly in _spec.AssembliesForInstallUtils)
 			{
 				var installUtil = Path.Combine(RuntimeEnvironment.GetRuntimeDirectory(), "InstallUtil");
 				try
@@ -112,9 +114,9 @@ namespace TinyInstaller
 
 		void DeployFiles()
 		{
-			foreach (var file in spec.FilesToInstall)
+			foreach (var file in _spec.FilesToInstall)
 			{
-				using(var stream = spec.FilesToInstall.GetFileContent(file.FileId))
+				using(var stream = _spec.FilesToInstall.GetFileContent(file.FileId))
 				{
 					var destinationFileName = Expand(file.TargetPath);
 					Directory.CreateDirectory(Path.GetDirectoryName(destinationFileName));
@@ -128,12 +130,12 @@ namespace TinyInstaller
 
 		string TargetFileNameById(string fileId)
 		{
-			return Expand(spec.FilesToInstall.Single(x => x.FileId == fileId).TargetPath);
+			return Expand(_spec.FilesToInstall.Single(x => x.FileId == fileId).TargetPath);
 		}
 
 		void RemoveFiles()
 		{
-			DeleteDir(spec.TargetDir);
+			DeleteDir(_spec.TargetDir);
 		}
 
 		static void DeleteDir(string name)
@@ -143,23 +145,23 @@ namespace TinyInstaller
 
 		public void ReadActualValues()
 		{
-			spec.IsInstalled = !string.IsNullOrEmpty(ReadRegistry<string>(spec.Identity, "DisplayName"));
-			spec.InstallLocation = ReadRegistry<string>(spec.Identity, "InstallLocation");
+			_spec.IsInstalled = !string.IsNullOrEmpty(ReadRegistry<string>(_spec.Identity, "DisplayName"));
+			_spec.InstallLocation = ReadRegistry<string>(_spec.Identity, "InstallLocation");
 		}
 
 		void AddWindowsUninstallInformation()
 		{
 			// save actual install location
-			spec.InstallLocation = spec.TargetDir;
+			_spec.InstallLocation = _spec.TargetDir;
 
-			foreach (var pro in spec.GetType().GetProperties())
+			foreach (var pro in _spec.GetType().GetProperties())
 			{
 				if (pro.GetCustomAttributes(typeof(WuAttribute), false).Any())
 				{
-					var value = pro.GetValue(spec, null);
+					var value = pro.GetValue(_spec, null);
 					if (value != null && value != string.Empty && !0.Equals(value))
 					{
-						WriteRegistry(spec.Identity, pro.Name, value);
+						WriteRegistry(_spec.Identity, pro.Name, value);
 					}
 				}
 			}
@@ -169,7 +171,7 @@ namespace TinyInstaller
 		{
 			ReadActualValues();
 
-			if (!spec.IsInstalled)
+			if (!_spec.IsInstalled)
 			{
 				MessageBox.Show("Product is not installed");
 			}
@@ -177,20 +179,20 @@ namespace TinyInstaller
 			{
 				SetVariables();
 				RunActions(false);
-				if (AppDomain.CurrentDomain.GetAssemblies().Any(x => x.Location.StartsWith(spec.InstallLocation, StringComparison.InvariantCultureIgnoreCase)))
+				if (AppDomain.CurrentDomain.GetAssemblies().Any(x => x.Location.StartsWith(_spec.InstallLocation, StringComparison.InvariantCultureIgnoreCase)))
 				{
-					Rebase("UninstallCommit", spec.Identity, spec.InstallLocation, Process.GetCurrentProcess().Id);
+					Rebase("UninstallCommit", _spec.Identity, _spec.InstallLocation, Process.GetCurrentProcess().Id);
 				}
 				else
 				{
-					UninstallCommit(spec.Identity, spec.InstallLocation);
+					UninstallCommit(_spec.Identity, _spec.InstallLocation);
 				}
 			}
 		}
 
 		static void Rebase(params object[] arguments)
 		{
-			var tinyAssembly = typeof(Program).Assembly;
+			var tinyAssembly = typeof(_Program).Assembly;
 			var tinyLocaltion = tinyAssembly.Location;
 			//var targetDir = Path.GetDirectoryName(tinyAssembly.Location);
 			var tinyAssemblyFileName = Path.GetFileName(tinyLocaltion);
