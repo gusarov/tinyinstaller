@@ -4,16 +4,10 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
+using TinyInstaller.Internal;
 
 namespace TinyInstaller
 {
-	public enum InstallationInterface
-	{
-		Sielent, // display no UI
-		ProgressUi, // display AdobeFlash-style passive installator
-		ProgressOkUi, // display AdobeFlash-style installator with one button
-	}
-
 	public class InstallationSpecification
 	{
 		public InstallationInterface Interface { get; set; }

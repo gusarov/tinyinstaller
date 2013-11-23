@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
+using TinyInstaller.Internal;
 
 // using MyUtils;
 
@@ -49,7 +49,7 @@ namespace TinyInstaller
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Messaging.Message(ex.GetType().Name, ex.Message);
 				return 1;
 			}
 		}

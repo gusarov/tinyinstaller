@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Reflection;
 
-namespace TinyInstaller
+namespace TinyInstaller.Internal
 {
 	static class UtilsExt
 	{

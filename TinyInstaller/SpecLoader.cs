@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Runtime.InteropServices;
+using TinyInstaller.Internal;
 
 namespace TinyInstaller
 {
@@ -27,8 +26,10 @@ namespace TinyInstaller
 
 		public static InstallationSpecification FromAssembly(Assembly targetAssembly)
 		{
-			var isUserMode = targetAssembly.Attribute<InstallUserModeAttribute>();
+			// var specType = typeof (InstallationSpecification);
+			// var spec = targetAssembly.GetTypes().FirstOrDefault(x => specType.IsAssignableFrom(x.BaseType));
 
+			var isUserMode = targetAssembly.Attribute<InstallUserModeAttribute>();
 			var identityAttribute = targetAssembly.Attribute<InstallerIdentityAttribute>();
 			var titleAttribute = targetAssembly.Attribute<AssemblyTitleAttribute>();
 			var productAttribute = targetAssembly.Attribute<AssemblyProductAttribute>();
@@ -68,10 +69,10 @@ namespace TinyInstaller
 				SpecAssembly = specAssembly,
 				AssembliesForInstallUtils = GetAssembliesForInstallUtils(container, targetAssembly).ToArray(),
 			};
-			if (isUserMode!=null)
-			{
-				spec.IsUserMode = isUserMode.IsUserMode;
-			}
+//			if (isUserMode!=null)
+//			{
+//				spec.IsUserMode = isUserMode.IsUserMode;
+//			}
 			return spec;
 		}
 

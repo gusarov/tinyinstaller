@@ -4,9 +4,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
-using System.Resources;
 
-namespace TinyInstaller
+namespace TinyInstaller.Internal
 {
 	class EmbededResourceFileContainer : IFileContainer
 	{

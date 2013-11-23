@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using TinyInstaller.CreateShourtcut;
+using TinyInstaller.Actions.CreateShourtcut;
 
 namespace TinyInstaller.Actions
 {

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TinyInstaller")]
+[assembly: AssemblyTitle("RebaseToMemory")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TinyInstaller")]
-[assembly: AssemblyCopyright("Copyright © Dmitry Gusarov 2012-2013")]
+[assembly: AssemblyProduct("RebaseToMemory")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("09f5ca5b-b0f4-4627-b928-a1bcb6c956cd")]
+[assembly: Guid("06ecaff9-c9e2-4ab2-ae3a-a1e8db849a5f")]
 
 // Version information for an assembly consists of the following four values:
 //

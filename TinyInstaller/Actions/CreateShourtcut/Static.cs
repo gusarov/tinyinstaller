@@ -1,8 +1,10 @@
+using System.Linq;
+using System.Collections.Generic;
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace TinyInstaller.CreateShourtcut
+namespace TinyInstaller.Actions.CreateShourtcut
 {
 	class Static
 	{

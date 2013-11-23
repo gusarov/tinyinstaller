@@ -12,6 +12,8 @@
     <AssemblyName>TinyInstaller</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <!--<ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>-->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,32 +33,35 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\IInstallerAction.cs" />
     <Compile Include="Actions\ShortcutInstallerAction.cs" />
-    <Compile Include="CreateShourtcut\WIN32_FIND_DATAW.cs" />
-    <Compile Include="CreateShourtcut\IPersist.cs" />
-    <Compile Include="CreateShourtcut\IPersistFile.cs" />
-    <Compile Include="CreateShourtcut\IShellLinkW.cs" />
-    <Compile Include="CreateShourtcut\ShellLink.cs" />
-    <Compile Include="CreateShourtcut\ShellLinkApi.cs" />
-    <Compile Include="CreateShourtcut\SLGP_FLAGS.cs" />
-    <Compile Include="CreateShourtcut\SLR_FLAGS.cs" />
-    <Compile Include="CreateShourtcut\Static.cs" />
+    <Compile Include="Actions\CreateShourtcut\WIN32_FIND_DATAW.cs" />
+    <Compile Include="Actions\CreateShourtcut\IPersist.cs" />
+    <Compile Include="Actions\CreateShourtcut\IPersistFile.cs" />
+    <Compile Include="Actions\CreateShourtcut\IShellLinkW.cs" />
+    <Compile Include="Actions\CreateShourtcut\ShellLink.cs" />
+    <Compile Include="Actions\CreateShourtcut\ShellLinkApi.cs" />
+    <Compile Include="Actions\CreateShourtcut\SLGP_FLAGS.cs" />
+    <Compile Include="Actions\CreateShourtcut\SLR_FLAGS.cs" />
+    <Compile Include="Actions\CreateShourtcut\Static.cs" />
+    <Compile Include="InstallationInterface.cs" />
+    <Compile Include="Internal\MessagingService.cs" />
     <Compile Include="ServiceInstaller\ServiceInfo.cs" />
     <Compile Include="ServiceInstaller\ServiceInstaller.cs" />
     <Compile Include="Actions\ServiceInstallerAction.cs" />
@@ -73,7 +79,23 @@
     <Compile Include="InstallUserModeAttribute.cs" />
     <Compile Include="Internal\UtilsExt.cs" />
     <Compile Include="Internal\WuAttribute.cs" />
+    <Compile Include="UI\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="_Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="UI\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\Documentation.txt" />
+    <Content Include="Documentation\Tasks.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

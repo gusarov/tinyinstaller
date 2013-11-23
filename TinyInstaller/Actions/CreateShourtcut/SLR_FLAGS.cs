@@ -1,6 +1,8 @@
+using System.Linq;
+using System.Collections.Generic;
 using System;
 
-namespace TinyInstaller.CreateShourtcut
+namespace TinyInstaller.Actions.CreateShourtcut
 {
 	[Flags()] 
 	enum SLR_FLAGS 

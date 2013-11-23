@@ -1,8 +1,10 @@
+using System.Linq;
+using System.Collections.Generic;
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace TinyInstaller.CreateShourtcut
+namespace TinyInstaller.Actions.CreateShourtcut
 {
 	/// <summary>The IShellLink interface allows Shell links to be created, modified, and resolved</summary> 
 	[ComImport(), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("000214F9-0000-0000-C000-000000000046")] 

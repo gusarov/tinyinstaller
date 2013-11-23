@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace TinyInstaller.CreateShourtcut
+namespace TinyInstaller.Actions.CreateShourtcut
 {
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)] 
 struct WIN32_FIND_DATAW 

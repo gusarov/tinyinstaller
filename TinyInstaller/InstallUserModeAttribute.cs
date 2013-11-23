@@ -2,6 +2,7 @@ using System;
 
 namespace TinyInstaller
 {
+
 	[AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = false)]
 	public sealed class InstallUserModeAttribute : Attribute
 	{

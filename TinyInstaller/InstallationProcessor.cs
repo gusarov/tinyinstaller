@@ -6,9 +6,10 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 
 using Microsoft.Win32;
+using TinyInstaller.Internal;
 
 namespace TinyInstaller
 {
@@ -84,7 +85,7 @@ namespace TinyInstaller
 				{
 					Run(installUtil, (installOrUninstall ? "" : "/u") + " " + TargetFileNameById(installUtilAssembly.FileId));
 				}
-				catch (Exception ex)
+				catch// (Exception ex)
 				{
 					if (!ignoreErrors)
 					{
@@ -159,7 +160,7 @@ namespace TinyInstaller
 				if (pro.GetCustomAttributes(typeof(WuAttribute), false).Any())
 				{
 					var value = pro.GetValue(_spec, null);
-					if (value != null && value != string.Empty && !0.Equals(value))
+					if (value != null && (value as string) != string.Empty && !0.Equals(value))
 					{
 						WriteRegistry(_spec.Identity, pro.Name, value);
 					}
@@ -173,7 +174,7 @@ namespace TinyInstaller
 
 			if (!_spec.IsInstalled)
 			{
-				MessageBox.Show("Product is not installed");
+				Messaging.Message("Product is not installed", "Error");
 			}
 			else
 			{

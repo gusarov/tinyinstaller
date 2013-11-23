@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using TinyInstaller.CreateShourtcut;
 using System.Diagnostics;
 using System.Threading;
+using TinyInstaller.Actions.CreateShourtcut;
 
 namespace MyTinyInstaller
 {

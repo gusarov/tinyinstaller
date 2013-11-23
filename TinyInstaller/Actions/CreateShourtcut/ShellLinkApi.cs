@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace TinyInstaller.CreateShourtcut
+namespace TinyInstaller.Actions.CreateShourtcut
 {
 	public class ShellLinkApi
 	{
