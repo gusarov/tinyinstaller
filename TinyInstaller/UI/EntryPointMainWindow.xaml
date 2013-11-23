@@ -1,0 +1,29 @@
+﻿<Window x:Class='TinyInstaller.UI.EntryPointMainWindow'
+	xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+	xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+	Title=''
+	WindowStartupLocation='CenterScreen'
+	WindowStyle='None'
+	Height='366'
+	Width='477'>
+	<Grid Background='#2D2D30'>
+		<Grid.RowDefinitions>
+			<RowDefinition Height='Auto' />
+			<RowDefinition Height='Auto' />
+			<RowDefinition Height='Auto' />
+			<RowDefinition Height='Auto' />
+			<RowDefinition Height='*' />
+			<RowDefinition Height='Auto' />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<TextBlock Grid.Row="0" Text="Application Code Name"/>
+		<TextBlock Grid.Row="1" Text="Application Display Name"/>
+		<TextBlock Grid.Row="2" Text="App Instance Name"/>
+		<Grid Grid.Row='99' Background='#252526' Grid.ColumnSpan="99">
+			<TextBlock Margin='10' VerticalAlignment='Bottom' HorizontalAlignment='Center' Text='Copyright © Dmitry Gusarov 2012-2013' />
+		</Grid>
+	</Grid>
+</Window>

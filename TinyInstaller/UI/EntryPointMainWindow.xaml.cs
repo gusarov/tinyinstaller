@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace TinyInstaller.UI
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Interaction logic for EntryPointMainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class EntryPointMainWindow : Window
 	{
-		public MainWindow()
+		public EntryPointMainWindow()
 		{
 			InitializeComponent();
 		}

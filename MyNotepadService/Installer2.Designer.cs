@@ -33,6 +33,7 @@
 			// 
 			// serviceInstaller1
 			// 
+			this.serviceInstaller1.DelayedAutoStart = true;
 			this.serviceInstaller1.Description = "MyNotepadService";
 			this.serviceInstaller1.DisplayName = "MyNotepadService";
 			this.serviceInstaller1.ServiceName = "MyNotepadService";

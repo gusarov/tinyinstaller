@@ -63,7 +63,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Class111.cs" />
     <Compile Include="MainNotepadWindow.xaml.cs">
       <DependentUpon>MainNotepadWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

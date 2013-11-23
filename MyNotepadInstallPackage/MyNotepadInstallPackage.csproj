@@ -55,6 +55,10 @@
       <Project>{C2C94683-0AD4-49E4-83CF-FB66F3D4004F}</Project>
       <Name>MyNotepadInstallSpec</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyNotepadUtils\MyNotepadUtils.csproj">
+      <Project>{080DCB8F-5E18-4F24-9D08-35213FF715B6}</Project>
+      <Name>MyNotepadUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyNotepad\MyNotepad.csproj">
       <Project>{31339644-3E8D-455C-8895-E06DFF487242}</Project>
       <Name>MyNotepad</Name>

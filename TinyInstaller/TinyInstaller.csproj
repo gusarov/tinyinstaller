@@ -60,27 +60,29 @@
     <Compile Include="Actions\CreateShourtcut\SLGP_FLAGS.cs" />
     <Compile Include="Actions\CreateShourtcut\SLR_FLAGS.cs" />
     <Compile Include="Actions\CreateShourtcut\Static.cs" />
-    <Compile Include="InstallationInterface.cs" />
+    <Compile Include="UI\App.cs" />
+    <Compile Include="Internal\InstallationInterface.cs" />
     <Compile Include="Internal\MessagingService.cs" />
-    <Compile Include="ServiceInstaller\ServiceInfo.cs" />
-    <Compile Include="ServiceInstaller\ServiceInstaller.cs" />
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Actions\ServiceInstaller\ServiceInfo.cs" />
+    <Compile Include="Actions\ServiceInstaller\ServiceInstaller.cs" />
     <Compile Include="Actions\ServiceInstallerAction.cs" />
     <Compile Include="Internal\EmbededResourceFileContainer.cs" />
     <Compile Include="Internal\FsFileContainer.cs" />
-    <Compile Include="IFileContainer.cs" />
-    <Compile Include="InstallableFileInfo.cs" />
-    <Compile Include="InstallationProcessor.cs" />
-    <Compile Include="InstallationProcessorExt.cs" />
-    <Compile Include="InstallationSpecification.cs" />
-    <Compile Include="InstallUtilsAssemblyAttribute.cs" />
+    <Compile Include="Internal\IFileContainer.cs" />
+    <Compile Include="Internal\InstallableFileInfo.cs" />
+    <Compile Include="Internal\InstallationProcessor.cs" />
+    <Compile Include="Internal\InstallationProcessorExt.cs" />
+    <Compile Include="Internal\InstallationSpecification.cs" />
+    <Compile Include="Internal\InstallUtilsAssemblyAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecLoader.cs" />
-    <Compile Include="InstallerIdentityAttribute.cs" />
-    <Compile Include="InstallUserModeAttribute.cs" />
+    <Compile Include="Internal\SpecLoader.cs" />
+    <Compile Include="Internal\InstallerIdentityAttribute.cs" />
+    <Compile Include="Internal\InstallUserModeAttribute.cs" />
     <Compile Include="Internal\UtilsExt.cs" />
     <Compile Include="Internal\WuAttribute.cs" />
-    <Compile Include="UI\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="UI\EntryPointMainWindow.xaml.cs">
+      <DependentUpon>EntryPointMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="_Program.cs" />
   </ItemGroup>
@@ -88,7 +90,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UI\MainWindow.xaml">
+    <Page Include="UI\EntryPointMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

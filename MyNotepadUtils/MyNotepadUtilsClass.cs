@@ -5,11 +5,7 @@ using System.Text;
 
 namespace MyNotepadUtils
 {
-	/// <summary>
-	/// TEST
-	/// </summary>
 	public class MyNotepadUtilsClass
 	{
 	}
-
 }
