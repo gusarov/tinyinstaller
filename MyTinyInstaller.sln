@@ -37,8 +37,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfControlLibrary1", "WpfCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RebaseToMemory", "RebaseToMemory\RebaseToMemory.csproj", "{51D6C3F9-6DB9-4A49-AE22-26D498965A70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyInstaller.Build", "TinyInstaller.Build\TinyInstaller.Build.csproj", "{10B798F5-797F-46EE-B6A1-AC2613A936D3}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MyTinyInstaller.vsmdi
@@ -178,16 +176,6 @@ Global
 		{51D6C3F9-6DB9-4A49-AE22-26D498965A70}.Release|Mixed Platforms.Build.0 = Release|x86
 		{51D6C3F9-6DB9-4A49-AE22-26D498965A70}.Release|x86.ActiveCfg = Release|x86
 		{51D6C3F9-6DB9-4A49-AE22-26D498965A70}.Release|x86.Build.0 = Release|x86
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{10B798F5-797F-46EE-B6A1-AC2613A936D3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

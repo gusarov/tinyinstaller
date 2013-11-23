@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,7 +29,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -40,10 +40,13 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
@@ -60,6 +63,8 @@
     <Compile Include="Actions\CreateShourtcut\SLGP_FLAGS.cs" />
     <Compile Include="Actions\CreateShourtcut\SLR_FLAGS.cs" />
     <Compile Include="Actions\CreateShourtcut\Static.cs" />
+    <Compile Include="Build\InstallerBuildTask.cs" />
+    <Compile Include="UI\IconUtilities.cs" />
     <Compile Include="UI\App.cs" />
     <Compile Include="Internal\InstallationInterface.cs" />
     <Compile Include="Internal\MessagingService.cs" />
@@ -88,6 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Build\TinyInstaller.props">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Build\TinyInstaller.targets">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\EntryPointMainWindow.xaml">
@@ -96,6 +107,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Build\Description.txt" />
     <Content Include="Documentation\Documentation.txt" />
     <Content Include="Documentation\Tasks.txt" />
   </ItemGroup>

@@ -1,0 +1,5 @@
+﻿This is an assembly that is required to build your custom installer
+It contains an MSBuild tasks and targets to override you building process.
+This assembly is supposed to be distributed and configured using NuGet only for building you installer and not for distrbuting with it.
+
+During compilation the target project should depend on primary output projects for installation. They will fetch their required references during a build process. All output files of target project will be injected into resultant installer as embeded resources. Then installer itself can extract this files during installation.

@@ -1,10 +1,16 @@
-﻿namespace SampleInstaller
+﻿using TinyInstaller;
+
+namespace SampleInstaller
 {
-	static class Program
+	internal static class Program
 	{
 		public static void Main()
 		{
-			//TinyInstallerProgram
+			new EntryPoint
+			{
+				Logo = () => new Logo(),
+				Title = "My Notepad Installer",
+			}.Run();
 		}
 	}
 }
