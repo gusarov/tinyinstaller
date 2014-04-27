@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TinyInstaller.Internal;
 
-namespace TinyInstaller
+namespace TinyInstaller.Internal
 {
 	public static class SpecLoader
 	{

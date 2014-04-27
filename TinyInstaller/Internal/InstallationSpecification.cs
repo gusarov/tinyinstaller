@@ -1,12 +1,10 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
-using System;
-using System.Reflection;
-using TinyInstaller.Internal;
 
-namespace TinyInstaller
+namespace TinyInstaller.Internal
 {
 	public class InstallationSpecification
 	{

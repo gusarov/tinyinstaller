@@ -6,7 +6,7 @@
 	</ItemGroup>
 	-->
 	<UsingTask TaskName="TinyInstaller.InstallerBuildTask" AssemblyName="TinyInstaller" />
-	<Target Name="NONE_asdasdas">
-		
+	<Target Name="BeforeBuild">
+		<Message Importance="high" Text="!!!!!! TEST !!!!!!!" />
 	</Target>
 </Project>

@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
-namespace TinyInstaller
+namespace TinyInstaller.Internal
 {
 	[AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = true)]
 	public sealed class InstallUtilsAssemblyAttribute : Attribute

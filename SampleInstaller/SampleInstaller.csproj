@@ -79,9 +79,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyNotepadService\MyNotepadService.csproj">
-      <Project>{d61fb039-6f21-4096-876d-34954b5f6c31}</Project>
-      <Name>MyNotepadService</Name>
+    <ProjectReference Include="..\MyNotepad\MyNotepad.csproj">
+      <Project>{31339644-3e8d-455c-8895-e06dff487242}</Project>
+      <Name>MyNotepad</Name>
     </ProjectReference>
     <ProjectReference Include="..\TinyInstaller\TinyInstaller.csproj">
       <Project>{6F533877-76DF-489B-8A09-BADD150217FA}</Project>
@@ -116,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon2.ico" />
   </ItemGroup>
   <Import Project="..\bin\Build\TinyInstaller.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

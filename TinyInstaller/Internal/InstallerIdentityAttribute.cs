@@ -1,8 +1,8 @@
-using System.Linq;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace TinyInstaller
+namespace TinyInstaller.Internal
 {
 	[AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = false)]
 	public sealed class InstallerIdentityAttribute : Attribute

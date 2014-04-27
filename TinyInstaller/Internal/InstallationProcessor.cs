@@ -1,17 +1,14 @@
-﻿using System;
+﻿//using System.Windows.Forms;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-//using System.Windows.Forms;
-
 using Microsoft.Win32;
-using TinyInstaller.Internal;
 
-namespace TinyInstaller
+namespace TinyInstaller.Internal
 {
 	public class InstallationProcessor
 	{

@@ -16,6 +16,18 @@
 		VerticalAlignment="Bottom"
 		Width='600'>
 	<Window.Resources>
+		<Storyboard x:Key="_goInstall">
+			<DoubleAnimation
+				Storyboard.TargetName="_sectionProgress"
+				Storyboard.TargetProperty="LayoutTransform.ScaleY"
+				To="1"
+				Duration="0:0:0.2" />
+			<DoubleAnimation
+				Storyboard.TargetName="_sectionButtons"
+				Storyboard.TargetProperty="LayoutTransform.ScaleY"
+				To="0"
+				Duration="0:0:0.2" />
+		</Storyboard>
 		<Style TargetType="TextBlock">
 			<Setter Property="Foreground" Value="White" />
 		</Style>
@@ -24,10 +36,18 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="Button">
-						<Border Name="b" BorderThickness="2" Padding="{TemplateBinding Padding}" Background="Transparent">
+						<Border
+							Name="b"
+							BorderThickness="2"
+							Padding="{TemplateBinding Padding}">
 							<Border.BorderBrush>
-								<SolidColorBrush />
+								<SolidColorBrush
+									Color="#00AAAAAA" />
 							</Border.BorderBrush>
+							<Border.Background>
+								<SolidColorBrush
+									Color="#00666666" />
+							</Border.Background>
 							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{TemplateBinding Content}" />
 						</Border>
 						<ControlTemplate.Triggers>
@@ -35,6 +55,13 @@
 								<Trigger.EnterActions>
 									<BeginStoryboard>
 										<Storyboard>
+											<ColorAnimation
+												To="#FF666666"
+												Duration="0:0:0.2"
+												AccelerationRatio="0.8"
+												DecelerationRatio="0.2"
+												Storyboard.TargetName="b"
+												Storyboard.TargetProperty="Background.Color" />
 											<ColorAnimation To="#FFAAAAAA" Duration="0:0:0.2" AccelerationRatio="0.8" DecelerationRatio="0.2" Storyboard.TargetName="b" Storyboard.TargetProperty="BorderBrush.Color" />
 										</Storyboard>
 									</BeginStoryboard>
@@ -42,7 +69,12 @@
 								<Trigger.ExitActions>
 									<BeginStoryboard>
 										<Storyboard>
-											<ColorAnimation To="#00FFFFFF" Duration="0:0:0.3" Storyboard.TargetName="b" Storyboard.TargetProperty="BorderBrush.Color" />
+											<ColorAnimation
+												To="#00666666"
+												Duration="0:0:0.3"
+												Storyboard.TargetName="b"
+												Storyboard.TargetProperty="Background.Color" />
+											<ColorAnimation To="#00AAAAAA" Duration="0:0:0.3" Storyboard.TargetName="b" Storyboard.TargetProperty="BorderBrush.Color" />
 										</Storyboard>
 									</BeginStoryboard>
 								</Trigger.ExitActions>
@@ -55,13 +87,19 @@
 	</Window.Resources>
 	<Border BorderThickness="1" BorderBrush="Black">
 		<DockPanel Margin="0">
-			<Grid Background='#2D2D30' DockPanel.Dock="Bottom">
+			<Grid
+				Background='#2D2D30'
+				DockPanel.Dock="Bottom"
+				Name="_sectionButtons">
+				<Grid.LayoutTransform>
+					<ScaleTransform />
+				</Grid.LayoutTransform>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition />
 					<ColumnDefinition />
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
-				<Button Padding="4" Margin="6" Grid.Column="0" Content="Options" FontWeight="Normal" FontSize="22" Foreground="#ffaaaaaa" Click="OptionsButton_Click"/>
+				<Button Padding="4" Margin="6" Grid.Column="0" Content="Options" FontWeight="Normal" FontSize="22" Foreground="#ffaaaaaa" Click="OptionsButton_Click" Visibility="Hidden" />
 				<Button Padding="4" Margin="6" Grid.Column="2" Content="{Binding InstallButtonCaption}" FontWeight="Bold" FontSize="22" Click="InstallButton_Click" />
 				<TextBlock Grid.ColumnSpan="99" Grid.RowSpan="99" Margin='3' Foreground="Gray" VerticalAlignment='Bottom' HorizontalAlignment='Center' Text='{Binding Copyright}' />
 			</Grid>
@@ -78,28 +116,75 @@
 						<RowDefinition Height='Auto' />
 						<RowDefinition Height='Auto' />
 						<RowDefinition Height='Auto' />
-						<RowDefinition Height='*' />
 						<RowDefinition Height='Auto' />
 					</Grid.RowDefinitions>
-					<Grid>
+					
+					<Grid
+						Opacity="1"
+						Grid.Row="0"
+						Name="_sectionTitle">
+						<Grid.LayoutTransform>
+							<ScaleTransform
+								ScaleY="1" />
+						</Grid.LayoutTransform>
+						<Image
+							Margin="4 2"
+							Source="{Binding Icon}"
+							Stretch="None"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top" />
+						<TextBlock
+							HorizontalAlignment="Center"
+							Margin="6"
+							FontSize="26"
+							Text="{Binding Title}" />
+					</Grid>
+					
+					<Grid
+						Name="_sectionOption"
+						Grid.Row="1"
+						Opacity="0">
+						<Grid.LayoutTransform>
+							<ScaleTransform
+								ScaleY="0" />
+						</Grid.LayoutTransform>
 						<Grid.RowDefinitions>
-							<RowDefinition Height='Auto' />
-							<RowDefinition Height='Auto' />
-							<RowDefinition Height='Auto' />
-							<RowDefinition Height='Auto' />
-							<RowDefinition Height='Auto' />
+							<RowDefinition
+								Height='Auto' />
+							<RowDefinition
+								Height='Auto' />
+							<RowDefinition
+								Height='Auto' />
+							<RowDefinition
+								Height='Auto' />
+							<RowDefinition
+								Height='Auto' />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition />
 							<ColumnDefinition />
 						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Row="0" Text="Application Code Name"/>
-						<TextBlock Grid.Row="1" Text="Application Display Name"/>
-						<TextBlock Grid.Row="2" Text="App Instance Name"/>
+						<TextBlock
+							Grid.Row="0"
+							Text="Application Code Name" />
+						<TextBlock
+							Grid.Row="1"
+							Text="Application Display Name" />
+						<TextBlock
+							Grid.Row="2"
+							Text="App Instance Name" />
+					</Grid>
+
+					<Grid Opacity="1" Name="_sectionProgress" Grid.Row="1">
+						<Grid.LayoutTransform>
+							<ScaleTransform
+								ScaleY="0" />
+						</Grid.LayoutTransform>
+						<ProgressBar Margin="10 6" Height="32" Maximum="100" Value="50" />
 					</Grid>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="99">
-						<Button Content="_" Padding="2 0" Margin="2 0" Click="MinButton_Click"/>
-						<Button Content="X" Padding="2 0" Margin="2 0" Click="CloseButton_Click" />
+						<Button Content="_" Padding="4 0" Margin="2" Click="MinButton_Click"/>
+						<Button Content="X" Padding="4 0" Margin="2" Click="CloseButton_Click" />
 					</StackPanel>
 				</Grid>
 			</Grid>

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace TinyInstaller.UI
 {
@@ -22,21 +23,10 @@ namespace TinyInstaller.UI
 		{
 			_interop = new WindowInteropHelper(this);
 			InitializeComponent();
-			var ep = EntryPoint.Instance;
-			
-			Title = ep.Title;
-			// this is made by system already:
-			//Icon = (ep.Icon ?? DefaulIcon)();
 			DataContext = _model;
 		}
 
 		private readonly EntryPointViewModel _model = new EntryPointViewModel();
-
-		private static ImageSource DefaulIcon()
-		{
-			var icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetEntryAssembly().Location);
-			return icon.ToImageSource();
-		}
 
 		private readonly WindowInteropHelper _interop;
 
@@ -63,7 +53,8 @@ namespace TinyInstaller.UI
 
 		private void InstallButton_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
-
+			var sb = (Storyboard)Resources["_goInstall"];
+			sb.Begin();
 		}
 
 		private void OptionsButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -74,6 +65,11 @@ namespace TinyInstaller.UI
 
 	class EntryPointViewModel
 	{
+		public string Title
+		{
+			get { return EntryPoint.Instance.Title; }
+		}
+
 		bool HaveUserAgreement
 		{
 			get
@@ -106,5 +102,15 @@ namespace TinyInstaller.UI
 				return null;
 			}
 		}
+
+		public ImageSource Icon
+		{
+			get
+			{
+				var icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetEntryAssembly().Location);
+				return icon.ToImageSource();
+			}
+		}
+
 	}
 }
