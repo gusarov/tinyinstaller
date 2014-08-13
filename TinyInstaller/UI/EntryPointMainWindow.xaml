@@ -16,7 +16,8 @@
 		VerticalAlignment="Bottom"
 		Width='600'>
 	<Window.Resources>
-		<Storyboard x:Key="_goInstall">
+		<Storyboard
+			x:Key="_goInstall">
 			<DoubleAnimation
 				Storyboard.TargetName="_sectionProgress"
 				Storyboard.TargetProperty="LayoutTransform.ScaleY"
@@ -26,6 +27,24 @@
 				Storyboard.TargetName="_sectionButtons"
 				Storyboard.TargetProperty="LayoutTransform.ScaleY"
 				To="0"
+				Duration="0:0:0.2" />
+		</Storyboard>
+		<Storyboard
+			x:Key="_goInstalled">
+			<DoubleAnimation
+				Storyboard.TargetName="_sectionProgress"
+				Storyboard.TargetProperty="LayoutTransform.ScaleY"
+				To="0"
+				Duration="0:0:0.2" />
+			<DoubleAnimation
+				Storyboard.TargetName="_sectionButtons"
+				Storyboard.TargetProperty="LayoutTransform.ScaleY"
+				To="0"
+				Duration="0:0:0.2" />
+			<DoubleAnimation
+				Storyboard.TargetName="_sectionSuccess"
+				Storyboard.TargetProperty="LayoutTransform.ScaleY"
+				To="1"
 				Duration="0:0:0.2" />
 		</Storyboard>
 		<Style TargetType="TextBlock">
@@ -42,11 +61,11 @@
 							Padding="{TemplateBinding Padding}">
 							<Border.BorderBrush>
 								<SolidColorBrush
-									Color="#00AAAAAA" />
+									Color="#22AAAAAA" />
 							</Border.BorderBrush>
 							<Border.Background>
 								<SolidColorBrush
-									Color="#00666666" />
+									Color="#22666666" />
 							</Border.Background>
 							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{TemplateBinding Content}" />
 						</Border>
@@ -70,11 +89,11 @@
 									<BeginStoryboard>
 										<Storyboard>
 											<ColorAnimation
-												To="#00666666"
+												To="#22666666"
 												Duration="0:0:0.3"
 												Storyboard.TargetName="b"
 												Storyboard.TargetProperty="Background.Color" />
-											<ColorAnimation To="#00AAAAAA" Duration="0:0:0.3" Storyboard.TargetName="b" Storyboard.TargetProperty="BorderBrush.Color" />
+											<ColorAnimation To="#22AAAAAA" Duration="0:0:0.3" Storyboard.TargetName="b" Storyboard.TargetProperty="BorderBrush.Color" />
 										</Storyboard>
 									</BeginStoryboard>
 								</Trigger.ExitActions>
@@ -112,13 +131,19 @@
 						</LinearGradientBrush>
 					</Grid.Background>
 					<Grid.RowDefinitions>
-						<RowDefinition Height='Auto' />
-						<RowDefinition Height='Auto' />
-						<RowDefinition Height='Auto' />
-						<RowDefinition Height='Auto' />
-						<RowDefinition Height='Auto' />
+						<RowDefinition
+							Height='Auto' />
+						<RowDefinition
+							Height='Auto' />
+						<RowDefinition
+							Height='Auto' />
+						<RowDefinition
+							Height='Auto' />
+						<RowDefinition
+							Height='Auto' />
+						<RowDefinition
+							Height='Auto' />
 					</Grid.RowDefinitions>
-					
 					<Grid
 						Opacity="1"
 						Grid.Row="0"
@@ -174,13 +199,29 @@
 							Grid.Row="2"
 							Text="App Instance Name" />
 					</Grid>
-
-					<Grid Opacity="1" Name="_sectionProgress" Grid.Row="1">
+					<Grid
+						Opacity="1"
+						Name="_sectionProgress"
+						Grid.Row="2">
 						<Grid.LayoutTransform>
 							<ScaleTransform
 								ScaleY="0" />
 						</Grid.LayoutTransform>
-						<ProgressBar Margin="10 6" Height="32" Maximum="100" Value="50" />
+						<ProgressBar
+							Margin="10 6"
+							Height="32"
+							Maximum="100"
+							Value="50" />
+					</Grid>
+					<Grid
+						Opacity="1"
+						Name="_sectionSuccess"
+						Grid.Row="3">
+						<Grid.LayoutTransform>
+							<ScaleTransform
+								ScaleY="0" />
+						</Grid.LayoutTransform>
+						<TextBlock TextAlignment="Center" FontSize="14" Foreground="Aqua">Success</TextBlock>
 					</Grid>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="99">
 						<Button Content="_" Padding="4 0" Margin="2" Click="MinButton_Click"/>

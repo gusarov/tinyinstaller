@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 using TinyInstaller.Internal;
 
 // using MyUtils;
@@ -16,6 +17,9 @@ namespace TinyInstaller
 	{
 		// Sample:
 
+		// TinyInstaller install "My App" "C:\ProgramFiles\My App\Spec.dll"
+		// load spec from specified assembly and initiate installation process
+
 		// TinyInstaller uninstall "My App" "C:\ProgramFiles\My App\Spec.dll"
 		// load spec from specified assembly and initiate uninstallation process
 
@@ -24,6 +28,15 @@ namespace TinyInstaller
 
 		static int Main(string[] args)
 		{
+#if DEBUG1
+			var sb = new StringBuilder();
+			for (int i = 0; i < args.Length; i++)
+			{
+				sb.AppendLine(args[i]);
+			}
+			MessageBox.Show(sb.ToString());
+#endif
+
 			try
 			{
 				// MessageBox.Show(string.Join(" ", args)+"\r\n"+Assembly.GetExecutingAssembly().Location, "TinyInstaller");
@@ -31,6 +44,12 @@ namespace TinyInstaller
 
 				for (int i = 0; i < args.Length; i++)
 				{
+					if (IsKey(args[i], "Install"))
+					{
+						var identity = args[++i];
+						var spec = args[++i];
+						Install(identity, spec);
+					}
 					if (IsKey(args[i], "Uninstall"))
 					{
 						var identity = args[++i];
@@ -84,6 +103,16 @@ namespace TinyInstaller
 				}
 				Thread.Sleep(100);
 			}
+		}
+
+		static void Install(string identity, string specAssemblyFile)
+		{
+			var spec = SpecLoader.FromAssembly(specAssemblyFile);
+			if (!string.IsNullOrEmpty(identity))
+			{
+				spec.Identity = identity;
+			}
+			spec.Install();
 		}
 
 		static void Uninstall(string identity, string specAssemblyFile)

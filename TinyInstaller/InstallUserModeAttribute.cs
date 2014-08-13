@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TinyInstaller.Internal
+namespace TinyInstaller
 {
 
 	[AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = false)]

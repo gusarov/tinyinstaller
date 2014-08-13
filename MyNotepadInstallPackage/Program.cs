@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using TinyInstaller;
+using TinyInstaller.Internal;
 
 namespace MyNotepadInstallPackage
 {

@@ -163,6 +163,20 @@ namespace TinyInstaller.Internal
 					}
 				}
 			}
+
+			// calculate size
+			try
+			{
+				var dir = new DirectoryInfo(_spec.InstallLocation);
+				var files = dir.EnumerateFileSystemInfos("*.*", SearchOption.AllDirectories).Select(x=>new FileInfo(x.FullName));
+				var sum = files.Sum(x => x.Length);
+				var sumK = (long)Math.Round(sum / 1024.0);
+				WriteRegistry(_spec.Identity, "EstimatedSize", sumK);
+			}
+			catch
+			{
+				
+			}
 		}
 
 		public void Uninstall()
@@ -196,7 +210,7 @@ namespace TinyInstaller.Internal
 			var tinyAssemblyFileName = Path.GetFileName(tinyLocaltion);
 			var shadowTinyAssemblyFileName = Path.Combine(Path.GetTempPath(), tinyAssemblyFileName);
 			File.Copy(Assembly.GetExecutingAssembly().Location, shadowTinyAssemblyFileName, true);
-			Process.Start(shadowTinyAssemblyFileName, string.Join(" ", arguments));
+			Process.Start(shadowTinyAssemblyFileName, string.Join(" ", arguments.Select(x => "\"" + x + '"')));
 		}
 
 		internal static void UninstallCommit(string identity, string targetDir)

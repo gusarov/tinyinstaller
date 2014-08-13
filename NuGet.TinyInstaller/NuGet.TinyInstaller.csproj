@@ -58,6 +58,7 @@
     <None Include="tools\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="lib\net45\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -67,14 +68,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\TinyInstaller\bin\Release\TinyInstaller.exe">
-      <Link>Build\TinyInstaller.exe</Link>
+    <None Include="..\bin\TinyInstaller.exe">
+      <Link>lib\net40\TinyInstaller.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\MyTinyInstaller\bin\Release\TinyInstaller.exe">
-      <Link>lib\net40\TinyInstaller.exe</Link>
+    <None Include="..\TinyInstaller\obj\Release\TinyInstaller.exe">
+      <Link>Build\TinyInstaller.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

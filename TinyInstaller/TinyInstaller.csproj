@@ -77,15 +77,15 @@
     <Compile Include="Internal\IFileContainer.cs" />
     <Compile Include="Internal\InstallableFileInfo.cs" />
     <Compile Include="Internal\InstallationProcessor.cs" />
-    <Compile Include="Internal\InstallationProcessorExt.cs" />
+    <Compile Include="InstallationProcessorExt.cs" />
     <Compile Include="Internal\InstallationSpecification.cs" />
-    <Compile Include="Internal\InstallUtilsAssemblyAttribute.cs" />
+    <Compile Include="InstallUtilsAssemblyAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\SpecLoader.cs" />
-    <Compile Include="Internal\InstallerIdentityAttribute.cs" />
-    <Compile Include="Internal\InstallUserModeAttribute.cs" />
+    <Compile Include="InstallerIdentityAttribute.cs" />
+    <Compile Include="InstallUserModeAttribute.cs" />
     <Compile Include="Internal\UtilsExt.cs" />
-    <Compile Include="Internal\WuAttribute.cs" />
+    <Compile Include="WuAttribute.cs" />
     <Compile Include="UI\EntryPointMainWindow.xaml.cs">
       <DependentUpon>EntryPointMainWindow.xaml</DependentUpon>
     </Compile>

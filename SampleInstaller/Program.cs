@@ -6,11 +6,7 @@ namespace SampleInstaller
 	{
 		public static void Main()
 		{
-			new EntryPoint
-			{
-				Logo = () => new Logo(),
-				Title = "My Notepad Installer",
-			}.Run();
+			EntryPoint.GuiRunWith("My Notepad Installer", () => new Logo());
 		}
 	}
 }

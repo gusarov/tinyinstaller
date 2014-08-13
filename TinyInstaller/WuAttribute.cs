@@ -1,8 +1,8 @@
-using System.Linq;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace TinyInstaller.Internal
+namespace TinyInstaller
 {
 	/// <summary>
 	/// Windows Uninstall - WriteRegistry value of this property to the registry for operating system

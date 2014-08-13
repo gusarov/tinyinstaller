@@ -27,7 +27,7 @@ namespace MyCustomUiInstaller
 		{
 			try
 			{
-				SpecLoader.FromAssembly<MainNotepadWindow>().Install();
+				EntryPoint.SpecFrom<MainNotepadWindow>().Install();
 				MessageBox.Show("SUCCESS", "", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 			catch (Exception ex)

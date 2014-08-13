@@ -8,15 +8,19 @@ namespace TinyInstaller.Internal
 {
 	public class InstallationSpecification
 	{
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public InstallationInterface Interface { get; set; }
 
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public bool IsInstalled { get; set; }
 
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public IFileContainer FilesToInstall { get; set; }
 
 		/// <summary>
-		/// Internal fixed tinyAssemblyFileName or guid. This is tinyAssemblyFileName of a key in a registry
+		/// Internal fixed name or guid. This is name of a key in a registry
 		/// </summary>
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public string Identity { get; set; }
 
 		#region WU REQUIRED
@@ -36,12 +40,24 @@ namespace TinyInstaller.Internal
 			set { _uninstallString = value; }
 		}
 
+		private string _qUninstallString;
+
+		[Wu]
+		public string QuietUninstallString
+		{
+			get
+			{
+				return _qUninstallString ?? (UninstallString + " /s");
+			}
+			set { _qUninstallString = value; }
+		}
+
 		protected string DefaultUninstallString
 		{
 			get
 			{
 				// return string.Format(@"cmd /c copy /y ""{0}"" ""%tmp%"" & ""%tmp%\TinyInstaller.exe"" -UninstallThisFolder", Path.Combine(TargetDir, @"TinyInstaller.exe"));
-				return string.Format(@"""{0}"" uninstall {1} ""{2}""", Path.Combine(TargetDir, @"TinyInstaller.exe"), Identity, Path.Combine(TargetDir, SpecAssembly));
+				return string.Format(@"""{0}"" uninstall ""{1}"" ""{2}""", Path.Combine(TargetDir, @"TinyInstaller.exe"), Identity, Path.Combine(TargetDir, SpecAssembly));
 			}
 		}
 
@@ -51,8 +67,20 @@ namespace TinyInstaller.Internal
 
 		private string _displayName;
 
+		private string _displayIcon;
+
+		[Wu]
+		public string DisplayIcon
+		{
+			get
+			{
+				return _displayIcon ?? (Path.Combine(TargetDir, SpecAssembly) + ",0");
+			}
+			set { _displayIcon = value; }
+		}
+
 		/// <summary>
-		/// Display tinyAssemblyFileName of application as it appears in Add/Remove. This is required value, by default equals to Identity.
+		/// Display name of application as it appears in Add/Remove. This is required value, by default equals to Identity.
 		/// </summary>
 		[Wu]
 		public string DisplayName
@@ -70,10 +98,14 @@ namespace TinyInstaller.Internal
 		}
 
 		[Wu]
-		public string DisplayIcon { get; set; }
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string HelpLink { get; set; }
 
 		[Wu]
-		public string HelpLink { get; set; }
+		public string Publisher { get; set; }
+
+		[Wu]
+		public string DisplayVersion { get; set; }
 
 		#endregion
 
@@ -84,6 +116,7 @@ namespace TinyInstaller.Internal
 		private ulong _noModify = 1;
 
 		[Wu]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public ulong NoModify
 		{
 			get { return _noModify; }
@@ -93,6 +126,7 @@ namespace TinyInstaller.Internal
 		private ulong _noRepair = 1;
 
 		[Wu]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public ulong NoRepair
 		{
 			get { return _noRepair; }
@@ -125,10 +159,10 @@ namespace TinyInstaller.Internal
 			}
 		}
 
-		bool _isUserMode = true;
+		bool? _isUserMode;
 		public bool IsUserMode
 		{
-			get { return _isUserMode; }
+			get { return _isUserMode ?? true; }
 			set { _isUserMode = value; }
 		}
 
@@ -149,10 +183,10 @@ namespace TinyInstaller.Internal
 
 		protected string DefaultTargetDir
 		{
-			get { return IsUserMode ? DefaultUserTargetDir : DefaultAdminTargetDir; }
+			get { return IsUserMode ? DefaultUserTargetDir : DefaultSystemTargetDir; }
 		}
 
-		protected string DefaultAdminTargetDir
+		protected string DefaultSystemTargetDir
 		{
 			get { return InstallationProcessor.Expand(@"%ProgramFiles%\" + DefaultTargetDirName); }
 		}

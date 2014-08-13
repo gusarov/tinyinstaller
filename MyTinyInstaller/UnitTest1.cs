@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TinyInstaller;
 using MyTinyInstaller.Properties;
+using TinyInstaller.Internal;
 
 namespace MyTinyInstaller
 {

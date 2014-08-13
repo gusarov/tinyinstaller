@@ -66,6 +66,8 @@ namespace TinyInstaller.Internal
 				Identity = identity,
 				FilesToInstall = container,
 				SpecAssembly = specAssembly,
+				Publisher = targetAssembly.Attribute<AssemblyCompanyAttribute>().Company,
+				DisplayVersion = targetAssembly.Attribute<AssemblyFileVersionAttribute>().Version,
 				AssembliesForInstallUtils = GetAssembliesForInstallUtils(container, targetAssembly).ToArray(),
 			};
 //			if (isUserMode!=null)

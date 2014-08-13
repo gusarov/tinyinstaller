@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -51,10 +52,38 @@ namespace TinyInstaller.UI
 			WindowState = System.Windows.WindowState.Minimized;
 		}
 
+		private bool? _success;
+
 		private void InstallButton_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
 			var sb = (Storyboard)Resources["_goInstall"];
 			sb.Begin();
+			ThreadPool.QueueUserWorkItem(delegate
+			{
+				try
+				{
+					var spec = EntryPoint.SpecFromEntryAssembly();
+					spec.Install();
+					_success = true;
+				}
+				catch (Exception ex)
+				{
+					_success = false;
+				}
+				finally
+				{
+					Dispatcher.BeginInvoke((Action)delegate
+					{
+						var sb2 = (Storyboard)Resources["_goInstalled"];
+						sb2.Begin();
+					});
+					Thread.Sleep(2000);
+					Dispatcher.BeginInvoke((Action)delegate
+					{
+						Close();
+					});
+				}
+			});
 		}
 
 		private void OptionsButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -67,7 +96,7 @@ namespace TinyInstaller.UI
 	{
 		public string Title
 		{
-			get { return EntryPoint.Instance.Title; }
+			get { return EntryPointArgs.Instance.Title; }
 		}
 
 		bool HaveUserAgreement
