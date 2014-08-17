@@ -36,6 +36,10 @@ namespace TinyInstaller
 			}
 			MessageBox.Show(sb.ToString());
 #endif
+			if (Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\Software\\TinyInstaller", "Debug", null) != null)
+			{
+				Debugger.Launch();
+			}
 
 			try
 			{
@@ -49,12 +53,14 @@ namespace TinyInstaller
 						var identity = args[++i];
 						var spec = args[++i];
 						Install(identity, spec);
+						return 0;
 					}
 					if (IsKey(args[i], "Uninstall"))
 					{
 						var identity = args[++i];
 						var spec = args[++i];
 						Uninstall(identity, spec);
+						return 0;
 					}
 					if (IsKey(args[i], "UninstallCommit"))
 					{
@@ -62,6 +68,7 @@ namespace TinyInstaller
 						var lastDirectoryToRemove = args[++i];
 						var waitForProcess = int.Parse(args[++i]);
 						UninstallCommit(identity, lastDirectoryToRemove, waitForProcess);
+						return 0;
 					}
 				}
 				return 0;

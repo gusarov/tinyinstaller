@@ -63,6 +63,7 @@ namespace TinyInstaller.Internal
 			var specAssembly = GetAssemblyFileId(targetAssembly, container);
 			var spec = new InstallationSpecification
 			{
+				IsUserMode = isUserMode == null ? true : isUserMode.IsUserMode,
 				Identity = identity,
 				FilesToInstall = container,
 				SpecAssembly = specAssembly,
@@ -70,10 +71,6 @@ namespace TinyInstaller.Internal
 				DisplayVersion = targetAssembly.Attribute<AssemblyFileVersionAttribute>().Version,
 				AssembliesForInstallUtils = GetAssembliesForInstallUtils(container, targetAssembly).ToArray(),
 			};
-//			if (isUserMode!=null)
-//			{
-//				spec.IsUserMode = isUserMode.IsUserMode;
-//			}
 			return spec;
 		}
 
