@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using Microsoft.Win32;
 
 namespace TinyInstaller.Internal
@@ -59,9 +60,7 @@ namespace TinyInstaller.Internal
 		public void Install()
 		{
 			_spec.Validate();
-
 			SetVariables();
-
 			DeployFiles();
 			RunActions(false, true);
 			RunActions(true);
@@ -80,7 +79,7 @@ namespace TinyInstaller.Internal
 				var installUtil = Path.Combine(RuntimeEnvironment.GetRuntimeDirectory(), "InstallUtil");
 				try
 				{
-					Run(installUtil, (installOrUninstall ? "" : "/u") + " " + TargetFileNameById(installUtilAssembly.FileId));
+					Run(installUtil, (installOrUninstall ? "" : "/u") + " \"" + TargetFileNameById(installUtilAssembly.FileId) + "\"");
 				}
 				catch// (Exception ex)
 				{
@@ -106,6 +105,17 @@ namespace TinyInstaller.Internal
 			p.WaitForExit();
 			if (p.ExitCode != 0)
 			{
+/*
+				var sb = new StringBuilder();
+				using (var s = p.StandardOutput)
+				{
+					sb.AppendLine(s.ReadToEnd());
+				}
+				using (var s = p.StandardError)
+				{
+					sb.AppendLine(s.ReadToEnd());
+				}
+*/
 				throw new Exception(string.Format("ExitCode: {0}: {1} {2}", p.ExitCode, p.StandardOutput.ReadToEnd(), p.StandardError.ReadToEnd()));
 			}
 		}

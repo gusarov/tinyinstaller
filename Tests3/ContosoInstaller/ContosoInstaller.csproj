@@ -42,6 +42,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -62,6 +63,10 @@
       <Project>{6F533877-76DF-489B-8A09-BADD150217FA}</Project>
       <Name>TinyInstaller</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ContosoService\ContosoService.csproj">
+      <Project>{89DA6288-684F-454A-B46E-C0E9270C3712}</Project>
+      <Name>ContosoService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ContosoUI\ContosoUI.csproj">
       <Project>{C53D2DE0-EAB6-4ED9-A0AC-5231F6E1D916}</Project>
       <Name>ContosoUI</Name>
@@ -71,6 +76,9 @@
     <Resource Include="1407937751_5985.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if exist A:\123 xcopy /y *.* A:\123</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

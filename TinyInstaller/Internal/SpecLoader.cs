@@ -79,12 +79,18 @@ namespace TinyInstaller.Internal
 
 		static IEnumerable<InstallableFileInfo> GetAssembliesForInstallUtils(IFileContainer container, Assembly target)
 		{
-			return target.GetCustomAttributes(typeof(InstallUtilsAssemblyAttribute), false).Cast<InstallUtilsAssemblyAttribute>().Select(x => GetTargetByInstallUtilsAssemblyAttribute(x, container)).ToList();
+			var attribs = target.GetCustomAttributes(typeof(InstallUtilsAssemblyAttribute), true);
+			var attribs2 = attribs.Cast<InstallUtilsAssemblyAttribute>().ToArray();
+			var targets = attribs2.Select(x => GetTargetByInstallUtilsAssemblyAttribute(x, container)).ToList();
+
+			return targets;
 		}
 
 		static InstallableFileInfo GetTargetByInstallUtilsAssemblyAttribute(InstallUtilsAssemblyAttribute attr, IFileContainer container)
 		{
-			return container.Where(x=>ValidExtension(x.FileId)).Single(x => x.FileName.StartsWith(attr.Assembly.FullName.Substring(0, attr.Assembly.FullName.IndexOf(','))));
+			return container
+				.Where(x=>ValidExtension(x.FileId))
+				.Single(x => x.FileName.StartsWith(attr.Assembly.FullName.Substring(0, attr.Assembly.FullName.IndexOf(','))));
 		}
 
 		static IFileContainer GetFileContainer(Assembly targetAssembly)

@@ -14,17 +14,18 @@ namespace MyTinyInstaller
 	[TestClass]
 	public class CreateShortCutTest
 	{
-		[TestMethod]
-		public void Test()
+		[TestInitialize]
+		public void Setup()
 		{
 			KillNotepads();
-			ShellLinkApi.Create(@"%windir%\notepad.exe", "test", "testdescription");
-			Assert.IsTrue(File.Exists("test.lnk"));
-			Assert.IsFalse(Process.GetProcesses().Any(x => x.ProcessName.Contains("notepad")));
-			Process.Start("test.lnk");
-			Thread.Sleep(1000);
-			Assert.IsTrue(Process.GetProcesses().Any(x => x.ProcessName.Contains("notepad")));
+			File.Delete("test.lnk");
+		}
+
+		[TestCleanup]
+		public void Teardown()
+		{
 			KillNotepads();
+			File.Delete("test.lnk");
 		}
 
 		private static void KillNotepads()
@@ -35,8 +36,17 @@ namespace MyTinyInstaller
 				process.Kill();
 			}
 		}
+
+		[TestMethod]
+		public void Test()
+		{
+			Assert.IsFalse(File.Exists("test.lnk"));
+			ShellLinkApi.Create(@"%windir%\notepad.exe", "test", "testdescription");
+			Assert.IsTrue(File.Exists("test.lnk"));
+			Assert.IsFalse(Process.GetProcesses().Any(x => x.ProcessName.Contains("notepad")));
+			Process.Start("test.lnk");
+			Thread.Sleep(1000);
+			Assert.IsTrue(Process.GetProcesses().Any(x => x.ProcessName.Contains("notepad")));
+		}
 	}
-
-
-
 }

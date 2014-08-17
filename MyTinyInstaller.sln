@@ -1,15 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyInstaller", "MyTinyInstaller\MyTinyInstaller.csproj", "{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InstallerAuthoring", "InstallerAuthoring", "{2EC3B1BB-5746-4C8A-8EF8-264D0B9DC6FE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyInstaller", "TinyInstaller\TinyInstaller.csproj", "{6F533877-76DF-489B-8A09-BADD150217FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A164AC96-623C-4ACA-8309-F339607AC04E}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{3A40AED6-544C-45AF-AC58-13F1A49A1C6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomUiInstaller", "MyCustomUiInstaller\MyCustomUiInstaller.csproj", "{781AADFC-1628-4237-9AAD-B58BE6B73101}"
 EndProject
@@ -17,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNotepad", "MyNotepad\MyNo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNotepadUtils", "MyNotepadUtils\MyNotepadUtils.csproj", "{080DCB8F-5E18-4F24-9D08-35213FF715B6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleApp", "SampleApp", "{F6CF54D8-41C3-44F6-95F8-D6A307B9E667}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample App", "Sample App", "{F6CF54D8-41C3-44F6-95F8-D6A307B9E667}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdealSetupProject", "IdealSetupProject", "{7E45BE8C-8BE3-49B4-BAC9-5199B6E7F475}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdealSetupProject - embed resources", "IdealSetupProject - embed resources", "{7E45BE8C-8BE3-49B4-BAC9-5199B6E7F475}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNotepadInstallSpec", "MyNotepadInstallSpec\MyNotepadInstallSpec.csproj", "{C2C94683-0AD4-49E4-83CF-FB66F3D4004F}"
 EndProject
@@ -29,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNotepadService", "MyNotep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{02E2B18C-B14A-4A10-BED1-434C68C52AC7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdealSetupProject2", "IdealSetupProject2", "{60B3197C-DE43-4726-83DE-B75EDACA7C57}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Issue 5 - customizable UI", "Issue 5 - customizable UI", "{60B3197C-DE43-4726-83DE-B75EDACA7C57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleInstaller", "SampleInstaller\SampleInstaller.csproj", "{A78B9BDC-3237-47AE-8F02-8E81CF0E6875}"
 EndProject
@@ -41,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.TinyInstaller", "NuGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication2", "ConsoleApplication2\ConsoleApplication2.csproj", "{316053DB-F02A-44D6-B091-723ABCC1397C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test3", "Test3", "{63BD15F1-0821-472B-B919-A353A0AA8C18}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests3 - Sample Contoso", "Tests3 - Sample Contoso", "{63BD15F1-0821-472B-B919-A353A0AA8C18}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{1EF2A4E9-1F1C-4006-B7FA-6BBC65AFA9CE}"
 EndProject
@@ -54,6 +48,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{DFF3CAD6-D3DD-4C85-86AB-44BD92E558B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoInstaller", "Tests3\ContosoInstaller\ContosoInstaller.csproj", "{F7437797-DC95-4B23-84E3-80A3D3DA817C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyInstaller.UnitTests", "TinyInstaller.UnitTests\TinyInstaller.UnitTests.csproj", "{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -68,16 +64,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|x86.ActiveCfg = Release|Any CPU
 		{6F533877-76DF-489B-8A09-BADD150217FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6F533877-76DF-489B-8A09-BADD150217FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F533877-76DF-489B-8A09-BADD150217FA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -88,12 +74,6 @@ Global
 		{6F533877-76DF-489B-8A09-BADD150217FA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6F533877-76DF-489B-8A09-BADD150217FA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6F533877-76DF-489B-8A09-BADD150217FA}.Release|x86.ActiveCfg = Release|Any CPU
-		{3A40AED6-544C-45AF-AC58-13F1A49A1C6A}.Debug|Any CPU.ActiveCfg = Debug
-		{3A40AED6-544C-45AF-AC58-13F1A49A1C6A}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{3A40AED6-544C-45AF-AC58-13F1A49A1C6A}.Debug|x86.ActiveCfg = Debug
-		{3A40AED6-544C-45AF-AC58-13F1A49A1C6A}.Release|Any CPU.ActiveCfg = Release
-		{3A40AED6-544C-45AF-AC58-13F1A49A1C6A}.Release|Mixed Platforms.ActiveCfg = Release
-		{3A40AED6-544C-45AF-AC58-13F1A49A1C6A}.Release|x86.ActiveCfg = Release
 		{781AADFC-1628-4237-9AAD-B58BE6B73101}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{781AADFC-1628-4237-9AAD-B58BE6B73101}.Debug|Any CPU.Build.0 = Debug|x86
 		{781AADFC-1628-4237-9AAD-B58BE6B73101}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -246,13 +226,21 @@ Global
 		{F7437797-DC95-4B23-84E3-80A3D3DA817C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F7437797-DC95-4B23-84E3-80A3D3DA817C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F7437797-DC95-4B23-84E3-80A3D3DA817C}.Release|x86.ActiveCfg = Release|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DC61E132-CD1D-45AE-84B7-39D3CE64F62C} = {A164AC96-623C-4ACA-8309-F339607AC04E}
-		{3A40AED6-544C-45AF-AC58-13F1A49A1C6A} = {A164AC96-623C-4ACA-8309-F339607AC04E}
 		{B22C7911-6565-4CF6-9918-745117A1F866} = {A164AC96-623C-4ACA-8309-F339607AC04E}
 		{51D6C3F9-6DB9-4A49-AE22-26D498965A70} = {A164AC96-623C-4ACA-8309-F339607AC04E}
 		{31339644-3E8D-455C-8895-E06DFF487242} = {F6CF54D8-41C3-44F6-95F8-D6A307B9E667}

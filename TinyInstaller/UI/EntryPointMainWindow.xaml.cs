@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -62,22 +63,34 @@ namespace TinyInstaller.UI
 			{
 				try
 				{
-					var spec = EntryPoint.SpecFromEntryAssembly();
-					spec.Install();
-					_success = true;
-				}
-				catch (Exception ex)
-				{
-					_success = false;
+					retry:
+					try
+					{
+						var spec = EntryPoint.SpecFromEntryAssembly();
+						spec.Install();
+						_success = true;
+					}
+					catch (Exception ex)
+					{
+						_success = false;
+						var res = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+						if (res == System.Windows.Forms.DialogResult.Retry)
+						{
+							goto retry;
+						}
+					}
 				}
 				finally
 				{
-					Dispatcher.BeginInvoke((Action)delegate
+					if (_success == true)
 					{
-						var sb2 = (Storyboard)Resources["_goInstalled"];
-						sb2.Begin();
-					});
-					Thread.Sleep(2000);
+						Dispatcher.BeginInvoke((Action)delegate
+						{
+							var sb2 = (Storyboard)Resources["_goInstalled"];
+							sb2.Begin();
+						});
+						Thread.Sleep(2000);
+					}
 					Dispatcher.BeginInvoke((Action)delegate
 					{
 						Close();

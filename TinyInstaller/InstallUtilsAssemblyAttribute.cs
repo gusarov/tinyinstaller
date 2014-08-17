@@ -9,7 +9,7 @@ namespace TinyInstaller
 	public sealed class InstallUtilsAssemblyAttribute : Attribute
 	{
 		//readonly string _assemblyFileId;
-		readonly Type _assemblyType;
+		Type _assemblyType;
 
 		public InstallUtilsAssemblyAttribute(Type assembly)
 		{
@@ -29,6 +29,7 @@ namespace TinyInstaller
 		public Type AssemblyType
 		{
 			get { return _assemblyType; }
+			set { _assemblyType = value; }
 		}
 
 		public Assembly Assembly
