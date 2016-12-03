@@ -98,6 +98,6 @@
     <Message Text="SUCCESS: Published package." Condition=" '$(Configuration)|$(Platform)|$(ExitCode)' == 'Release|AnyCPU|0' " Importance="High" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if '$(ConfigurationName)'=='Release' $(ProjectDir)nuspecinc $(ProjectDir)Package.nuspec</PostBuildEvent>
+    <PostBuildEvent>if '$(ConfigurationName)'=='Release' "$(ProjectDir)nuspecinc" "$(ProjectDir)Package.nuspec"</PostBuildEvent>
   </PropertyGroup>
 </Project>
