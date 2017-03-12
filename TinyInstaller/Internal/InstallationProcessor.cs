@@ -131,6 +131,7 @@ namespace TinyInstaller.Internal
 					using (var destination = File.OpenWrite(destinationFileName))
 					{
 						stream.CopyTo(destination);
+						destination.SetLength(stream.Length); // truncate file!
 					}
 				}
 			}
