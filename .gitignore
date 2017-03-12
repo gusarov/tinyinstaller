@@ -6,3 +6,8 @@
 bin/
 obj/
 .rid
+*.nupkg
+*.bak
+*.log
+
+
